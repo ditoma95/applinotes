@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required, permission_required
+from Templating_ifnti.controleur import generate_pdf
 
 from PyPDF2 import PdfFileReader
 from PyPDF2 import PdfFileWriter
@@ -129,11 +130,48 @@ def add_notes(request, eleve_id, matiere_id):
 
 
 def listEleves(request):
-    paths = '/home/dimitri/Documents/L3/ProjetDjango/ifntidjango/pdf/fichier.pdf'
-    if os.path.exists(paths):
-        with open(paths, 'rb') as file:
-            response = HttpResponse(file.read(), content_type='application/pdf')
-            response['Content-Disposition'] = 'inline; filename="fichier.pdf"'
-            return response
+    affich = Eleve.objects.all()
+    lists = list(affich.values())
+    dictionary_list = {
+           "eleves":lists
+        }
+    
+    generate_pdf(dictionary_list)
+
+
+    paths = 'out/liste_eleves.pdf'
+    if paths.endswith('.pdf'):
+        if os.path.exists(paths):
+            with open(paths, 'rb') as file:
+                response = HttpResponse(file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = 'inline; filename="fichier.pdf"'
+                return response
+        else:
+            return HttpResponse("Le fichier PDF n'a pas été trouvé.", status=404)
     else:
-        return HttpResponse("Le fichier PDF n'a pas été trouvé.", status=404)
+        return Http404("Le fichier n'est pas au format attendu (.pdf)")
+        
+def liste_niveauElv(request, id):
+    afficheparNiveau = Eleve.objects.filter(niveau=id)
+    lists = list(afficheparNiveau.values())
+    dictionary_list = {
+           "eleves":lists
+        }
+    
+    generate_pdf(dictionary_list)
+
+
+    paths = 'out/liste_eleves.pdf'
+    if paths.endswith('.pdf'):
+        if os.path.exists(paths):
+            with open(paths, 'rb') as file:
+                response = HttpResponse(file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = 'inline; filename="fichier.pdf"'
+                return response
+        else:
+            return HttpResponse("Le fichier PDF n'a pas été trouvé.", status=404)
+    else:
+        return Http404("Le fichier n'est pas au format attendu (.pdf)")
+        
+
+

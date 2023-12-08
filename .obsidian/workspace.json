@@ -20,24 +20,6 @@
             }
           }
         ]
-      },
-      {
-        "id": "6efd2156a24c1d79",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "143b19f449005953",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Readme.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -165,6 +147,51 @@
       "command-palette:Ouvrir la palette de commandes": false
     }
   },
-  "active": "5dde654b16cc6768",
-  "lastOpenFiles": []
+  "floating": {
+    "id": "88700a415d09e770",
+    "type": "floating",
+    "children": [
+      {
+        "id": "b6e87df1a71a49c4",
+        "type": "window",
+        "children": [
+          {
+            "id": "7214dff14c56338b",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "143b19f449005953",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "Readme.md",
+                    "mode": "source",
+                    "source": false
+                  }
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "vertical",
+        "x": 1262,
+        "y": 300,
+        "width": 658,
+        "height": 760,
+        "maximize": false,
+        "zoom": 0
+      }
+    ]
+  },
+  "active": "143b19f449005953",
+  "lastOpenFiles": [
+    "out/logoIfnti.png",
+    "out/liste_eleves.pdf",
+    "out/template_out.tex",
+    "ifnti/liste_eleves.tex",
+    "Templating_ifnti/__pycache__/controleur.cpython-310.pyc",
+    "Templating_ifnti/__pycache__",
+    "notes/__pycache__/views.cpython-310.pyc.139988422449968"
+  ]
 }
