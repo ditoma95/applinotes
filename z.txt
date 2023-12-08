@@ -1,0 +1,8 @@
+>>> niveau1 = Niveau.objects.get(nom='L1')
+>>> eleve1 = Eleve(nom='Toune', prenom='Ouvo', sexe='M', date_naissance='1995-10-25', id='90154846',  niveau=niveau1).save()
+>>> niveau2 = Niveau.objects.get(nom='L2')
+>>> eleve1 = Eleve(nom='Falle', prenom='Éppa', sexe='F', date_naissance='1993-5-2', id='90154234',  niveau=niveau2).save()
+>>> niveau3 = Niveau.objects.get(nom='L3')
+>>> eleve1 = Eleve(nom='Jean', prenom='Aimar', sexe='M', date_naissance='1993-12-6', id='90153598',  niveau=niveau3).save()
+>>> niveau4 = Niveau(nom="L3").save()
+>>> eleve4 = Eleve(nom='Tartaglia', prenom='Rinasciamento', sexe='M', date_naissance='1990-10-25', id='90153548',  niveau=niveau3).save()

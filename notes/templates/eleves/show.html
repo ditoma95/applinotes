@@ -1,0 +1,71 @@
+{% extends "notes/index.html" %}
+{% block content %}
+
+    <div class="bg-gray-200 rounded-lg shadow-lg p-6">
+        <div class="flex justify-end">
+            <a class="bg-green-800 p-1 text-white rounded-xl" href="{% url 'notes:eleves' %}">retour</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="h-96 w-96 bg-black rounded-lg">
+                <img src="" alt="">
+            </div>
+
+            <div>
+                <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ unEleve.nom }}</h1>
+                <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ unEleve.sexe }}</h1>
+                <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ unEleve.prenom }}</h1>
+                <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ unEleve.date_naissance }}</h1>
+                <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ unEleve.niveau}}</h1>
+                <div class="flex gap-3">
+                    {% for matis in listmatires %}
+                        <div>
+                            <div class="bg-gray-700 rounded-lg">
+                                <div class="text-center p-2 text-white">
+                                    {{ matis.0}}
+                                    <hr>
+                                    <h4>Moyenne : 
+                                        {{ matis.1}}
+                                    </h4>
+                                </div>
+                                <hr>
+                                <div class="p-2">
+                                    <ul>
+                                        {% for nt in matis.0.note_set.all %}
+                                        <li class="text-white">{{ nt}}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <hr>
+                            </div>
+                                                        <div class="bg-green-800 rounded-md p-1 text-center">
+                                <a href="{% url 'notes:add_notes' unEleve.id  matis.0.id %}" class="text-white">ajouter une note</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="bg-gray-600 h-8 w-32 rounded-xl animate-bounce">
+                        <h1 class="text-white font-bold text-center"> Moy : 
+                            {{ moyenne_generale }}
+                        </h1>
+                    </div>
+                    
+                </div>
+
+                
+                
+
+               
+                <!-- {% if nbre_matiere == 0 %}
+                    <h3>Aucune matière disponible </h3>
+                {% else %}
+                    {% for mts in matier %}
+                        <h1 class="text-gray-900 text-xl title-font font-medium mb-1">{{ mts}}</h1>
+                    {% endfor %}
+                {% endif %} -->
+                
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
