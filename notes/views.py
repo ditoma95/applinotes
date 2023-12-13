@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required, permission_required
 from Templating_ifnti.controleur import generate_pdf
+from Templating_ifnti.controlleurNote import generate_notes_pdf
 
 from PyPDF2 import PdfFileReader
 from PyPDF2 import PdfFileWriter
@@ -174,4 +175,26 @@ def liste_niveauElv(request, id):
         return Http404("Le fichier n'est pas au format attendu (.pdf)")
         
 
+#la vue notesEleves permettant de générer les notes des élèves d’une matière donnée
+
+def notesEleves(request, id):
+    recup_note = Note.objects.filter(matiere=id)
+    dictionary_list = {
+           "recup_note":recup_note
+        }
+    
+    
+    generate_notes_pdf(dictionary_list)
+
+    paths = 'out/notes_par_matiere.pdf'
+    if paths.endswith('.pdf'):
+        if os.path.exists(paths):
+            with open(paths, 'rb') as file:
+                response = HttpResponse(file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = 'inline; filename="fichier.pdf"'
+                return response
+        else:
+            return HttpResponse("Le fichier PDF n'a pas été/Dk.", status=404)
+    else:
+        return Http404("Le fichier n'est pas au format attendu (.pdf)")
 

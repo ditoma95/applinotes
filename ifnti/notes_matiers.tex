@@ -18,7 +18,7 @@
 \usepackage{longtable}
 \usepackage{phonenumbers}
 \usepackage{telprint}
-\graphicspath{ {/home/dimitri/Documents/L3/applinotes/Templating_ifnti/out/images/} }
+\graphicspath{ {\VAR{image_path}} }
 \begin{document}
 \begin{minipage}{12cm}
 \textsf{REGION CENTRALE} \\ \hspace{1cm}
@@ -36,9 +36,16 @@ IFNTI-Sokodé TOGO\\300 BP 40
 \begin{center}
 \underline{\textbf{LISTE DES ETUDIANTS}}
 \end{center}
-\begin{longtable}{|l|l|l|l|l|} \hline
-\textbf{Matricule} & \textbf{Nom} & \textbf{Prénom} &
-\textbf{Sexe} & \textbf{Date Naissance}\\ \hline
+\begin{longtable}{|l|l|l|l|} \hline
+\textbf{nom} & \textbf{prenom} & \textbf{Nom Matiere} &
+\textbf{Note} \\ \hline
+\BLOCK{for note in recup_note}
 
+\VAR{note.eleve.nom} & \VAR{note.eleve.prenom} & \VAR{note.matiere.nom} &  \VAR{note.valeur} \\ \hline
+
+
+\BLOCK{endfor}
 \end{longtable}
 \end{document}
+
+

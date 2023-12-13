@@ -22,6 +22,7 @@ urlpatterns = [
     path("pdf/", views.listEleves, name="pdf"),
 
     path("pdf_niveau/<int:id>/", views.liste_niveauElv, name="pdf_niveau"),
+    path("notesEleves/<int:id>/", views.notesEleves, name="notesEleves"),
     
 
 ]
