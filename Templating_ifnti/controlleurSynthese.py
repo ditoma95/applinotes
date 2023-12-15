@@ -4,7 +4,7 @@ from os.path import dirname, abspath
 
 
 
-def generate_pdf(context) :
+def generate_notes_synthese_pdf(context) :
 
     #’’’INSTANCIATION D’UN NOUVEL ENVIRONNEMEN AVEC DES OPTIONS DE BALISES PERSONNALISÉES’’’
     j2_env = Environment(variable_start_string="\VAR{",
@@ -15,9 +15,9 @@ def generate_pdf(context) :
     #’’’DECLARATION DE FICHIER’’’
     #fichier à lire contenant le template avec les balises
 
-    fichier_in = open("ifnti/liste_eleves.tex", 'r')
+    fichier_in = open("ifnti/syntheseNote.tex", 'r')
     #fichier en sortie accueillant les donnéesfournies
-    fichier_out = open("out/template_out.tex", 'w')
+    fichier_out = open("out/template_out_synthese.tex", 'w')
     template = fichier_in.read() #lecture du template
     monContext = context
     monContext["image_path"] = dirname(dirname(abspath(__file__))) + "/out/images/"
@@ -28,8 +28,8 @@ def generate_pdf(context) :
     # écriture dans le fichier en sortie
     fichier_out.write(j2_template.render(monContext))
     fichier_out.close()
-    mon_pdf = build_pdf(open("out/template_out.tex", 'r'))
-    mon_pdf.save_to("out/liste_eleves.pdf")
+    mon_pdf = build_pdf(open("out/template_out_synthese.tex", 'r'))
+    mon_pdf.save_to("out/notes_par_matiere.pdf")
 
     #’’’FERMETURE DE CANAUX’’’
     fichier_in.close()

@@ -20,7 +20,7 @@ def generate_notes_pdf(context) :
     fichier_out = open("out/template_out_notes.tex", 'w')
     template = fichier_in.read() #lecture du template
     monContext = context
-    monContext["image_path"] = dirname(abspath(__file__)) + "/out/images/"
+    monContext["image_path"] = dirname(dirname(abspath(__file__))) + "/out/images/"
 
     #’’’APPLICATION DE L’ENVIRONNEMENT EDITE SUR LE TEMPLATE’’’
     j2_template = j2_env.from_string(template)

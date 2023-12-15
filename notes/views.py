@@ -3,6 +3,7 @@ from django.db.models import Avg
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404, HttpResponse
 from django.urls import reverse
+from Templating_ifnti.controlleurSynthese import generate_notes_synthese_pdf
 from notes.forms import Formulaire
 from django.contrib.auth.decorators import login_required
 
@@ -178,11 +179,12 @@ def liste_niveauElv(request, id):
 #la vue notesEleves permettant de générer les notes des élèves d’une matière donnée
 
 def notesEleves(request, id):
-    recup_note = Note.objects.filter(matiere=id)
+    recu_matiere = Matiere.objects.get(id=id)
+    recup_note= recu_matiere.note_set.all()
     dictionary_list = {
-           "recup_note":recup_note
+           "recup_note":recup_note, "recu_matiere":recu_matiere.nom
         }
-    
+    #print(dictionary_list)
     
     generate_notes_pdf(dictionary_list)
 
@@ -198,3 +200,4 @@ def notesEleves(request, id):
     else:
         return Http404("Le fichier n'est pas au format attendu (.pdf)")
 
+# recuperatin des moyennes des eleve dans chaque matière
