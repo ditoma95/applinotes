@@ -29,7 +29,7 @@ def generate_notes_synthese_pdf(context) :
     fichier_out.write(j2_template.render(monContext))
     fichier_out.close()
     mon_pdf = build_pdf(open("out/template_out_synthese.tex", 'r'))
-    mon_pdf.save_to("out/notes_par_matiere.pdf")
+    mon_pdf.save_to("out/syntheseNote.pdf")
 
     #’’’FERMETURE DE CANAUX’’’
     fichier_in.close()

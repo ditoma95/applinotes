@@ -34,14 +34,14 @@ IFNTI-Sokodé TOGO\\300 BP 40
 \end{center}
 \end{minipage}
 \begin{center}
-\underline{\textbf{LISTE DES NOTES :  {\VAR{recu_matiere}}}}
+\underline{\textbf{LISTE DES NOTES :  {\VAR{rep_eleve.nom}}}}
 \end{center}
 \begin{longtable}{|l|l|l|l|} \hline
-\textbf{nom} & \textbf{prenom} &
-\textbf{Note} \\ \hline
-% \BLOCK{for note in recup_note}
+\textbf{Matiere}  &
+\textbf{Moyenne} \\ \hline
+\BLOCK{for matieres in rep_matiere}
 
-\VAR{0} & \VAR{0} &  \VAR{0} \\ \hline
+\VAR{matieres.nom} &  \VAR{matieres.moyenne} \\ \hline
 
 
 \BLOCK{endfor}

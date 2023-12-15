@@ -201,3 +201,44 @@ def notesEleves(request, id):
         return Http404("Le fichier n'est pas au format attendu (.pdf)")
 
 # recuperatin des moyennes des eleve dans chaque matière
+
+def notesSynthese(request, id):
+    rep_eleve = Eleve.objects.get(id=id)
+    rep_matiere = rep_eleve.niveau.matiere_set.all()
+    #print(rep_matiere)
+        
+
+    for maits in rep_matiere:
+        recupnotes = maits.note_set.all()
+        moyenne = recupnotes.aggregate(Avg('valeur', default=0))['valeur__avg']
+        maits.moyenne = moyenne
+
+    print(rep_matiere)
+    
+    for maits in rep_matiere:
+        print(maits.moyenne)
+
+    # for maits in rep_matiere:
+    #     recupnotes = maits.note_set.all()
+    #     moyenne = recupnotes.aggregate(Avg('valeur', default=0))['valeur__avg']
+
+
+    dictionary_lis = {
+           "rep_eleve": rep_eleve, "rep_matiere":rep_matiere
+        }
+   
+    
+    
+    generate_notes_synthese_pdf(dictionary_lis)
+
+    paths = 'out/syntheseNote.pdf'
+    if paths.endswith('.pdf'):
+        if os.path.exists(paths):
+            with open(paths, 'rb') as file:
+                response = HttpResponse(file.read(), content_type='application/pdf')
+                response['Content-Disposition'] = 'inline; filename="fichier.pdf"'
+                return response
+        else:
+            return HttpResponse("Le fichier PDF n'a pas été/Dk.", status=404)
+    else:
+        return Http404("Le fichier n'est pas au format attendu (.pdf)")
