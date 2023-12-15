@@ -205,23 +205,16 @@ def notesEleves(request, id):
 def notesSynthese(request, id):
     rep_eleve = Eleve.objects.get(id=id)
     rep_matiere = rep_eleve.niveau.matiere_set.all()
-    #print(rep_matiere)
-        
+    #print(rep_matiere) 
 
     for maits in rep_matiere:
         recupnotes = maits.note_set.all()
         moyenne = recupnotes.aggregate(Avg('valeur', default=0))['valeur__avg']
         #création d'un attribut virtuelle
         maits.moyenne = moyenne
-
-
-
     dictionary_lis = {
            "rep_eleve": rep_eleve, "rep_matiere":rep_matiere
         }
-   
-    
-    
     generate_notes_synthese_pdf(dictionary_lis)
 
     paths = 'out/syntheseNote.pdf'
