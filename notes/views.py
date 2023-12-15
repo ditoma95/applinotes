@@ -211,16 +211,9 @@ def notesSynthese(request, id):
     for maits in rep_matiere:
         recupnotes = maits.note_set.all()
         moyenne = recupnotes.aggregate(Avg('valeur', default=0))['valeur__avg']
+        #création d'un attribut virtuelle
         maits.moyenne = moyenne
 
-    print(rep_matiere)
-    
-    for maits in rep_matiere:
-        print(maits.moyenne)
-
-    # for maits in rep_matiere:
-    #     recupnotes = maits.note_set.all()
-    #     moyenne = recupnotes.aggregate(Avg('valeur', default=0))['valeur__avg']
 
 
     dictionary_lis = {
